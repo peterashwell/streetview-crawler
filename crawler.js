@@ -6,11 +6,12 @@ var svInstance = new google.maps.StreetViewService();
 var allPanoramas = {};
 var map = null;
 var panorama = null;
-var MAX_PANORAMAS_FETCHED = 1;
+var MAX_PANORAMAS_FETCHED = 10000;
 
 // Sample locations
 var clovelly = new google.maps.LatLng(-33.9049699,151.2510592);
 var harbourBridge = new google.maps.LatLng(-33.852001,151.211058);
+var darlinghurst = new google.maps.LatLng(-33.879214,151.21527);
 
 function initialize() {
     console.log('initializing...');
@@ -23,7 +24,7 @@ function initialize() {
 
 function drawPanorama() {
     var panoramaOptions = {
-        position: clovelly /*harbourBridge*/
+        position: darlinghurst /*harbourBridge*/
     };
     panorama = new google.maps.StreetViewPanorama(
         document.getElementById('pano'), panoramaOptions
@@ -49,7 +50,7 @@ function drawPanorama() {
 function drawMap() {
     var mapOptions = {
         zoom: 15,
-        center: clovelly
+        center: darlinghurst 
     };
     map = new google.maps.Map(
         document.getElementById('map'), mapOptions

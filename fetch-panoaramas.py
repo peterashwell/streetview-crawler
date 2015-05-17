@@ -10,7 +10,7 @@ SV_PARAMS = {
     'fov': 40
 }
 
-panorama_file = 'panoramas.txt'
+panorama_file = 'darlinghurst.txt'
 
 
 def generate_view_urls(pid, lat, lng):
