@@ -27,3 +27,7 @@ Dump panoramas found to text file
 =================================
  - can be done using blob: http://stackoverflow.com/questions/8178825/create-text-file-in-javascript
  - use window.open(blobUrl) rather than dodgy shit with a link
+
+Script to generate images and fetch them in python
+==================================================
+ - just use wget -i <file-with-images-list-in>
