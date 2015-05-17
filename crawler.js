@@ -6,7 +6,7 @@ var svInstance = new google.maps.StreetViewService();
 var allPanoramas = {};
 var map = null;
 var panorama = null;
-var MAX_PANORAMAS_FETCHED = 50;
+var MAX_PANORAMAS_FETCHED = 1;
 
 // Sample locations
 var clovelly = new google.maps.LatLng(-33.9049699,151.2510592);
@@ -17,6 +17,8 @@ function initialize() {
     
     drawPanorama();
     drawMap();
+
+    document.getElementById('generate-data').addEventListener('click', generateData);
 }
 
 function drawPanorama() {
@@ -81,6 +83,26 @@ function findNearbyPanoramas(pano) {
     if (pano.links) {
         pano.links.forEach(visitLink);
     }
+}
+
+function generateData() {
+    var textFile = null;
+
+    var text = 'panoId\tlat\tlng\n';
+    for (var panoId in allPanoramas) {
+        if (allPanoramas.hasOwnProperty(panoId)) {
+            var pano = allPanoramas[panoId],
+                lat = pano.location.latLng.lat(),
+                lng = pano.location.latLng.lng();
+            text += panoId + '\t' + lat + '\t' + lng + '\n';
+            console.debug('building txt with:', pano);
+        }
+    }
+
+    var data = new Blob([text], {type: 'text/plain'});
+    var textFile = window.URL.createObjectURL(data);
+
+    window.open(textFile);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

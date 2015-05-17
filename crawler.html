@@ -2,11 +2,22 @@
 <html>
 <head>
     <style>
-        html, body, #pano, #map{
+        html, body: {
+            width: 1000x;
+        }
+        #pano, #map{
             height: 400px;
-            width: 600px;
+            width: 50%;
             margin: 0px;
             padding: 0px;
+            float: left;
+        }
+        .view {
+            width: 100%;
+        }
+        .controls {
+            text-align: center;
+            margin: 20px;
         }
     </style>
 
@@ -24,7 +35,15 @@
     </script>
 </head>
 <body>
-    <div style="float:left" id="pano"></div>
-    <div style="float:left" id="map"></div>
+    <div class="view">
+        <div id="pano"></div>
+        <div id="map"></div>
+    </div>
+    <div style="clear:both"></div>
+    <div class="controls">
+        <button id="generate-data">
+            generate data
+        </button>
+    </div>
 </body>
 </html>
