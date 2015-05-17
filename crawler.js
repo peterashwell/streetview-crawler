@@ -6,6 +6,7 @@ var svInstance = new google.maps.StreetViewService();
 var allPanoramas = {};
 var map = null;
 var panorama = null;
+var MAX_PANORAMAS_FETCHED = 50;
 
 // Sample locations
 var clovelly = new google.maps.LatLng(-33.9049699,151.2510592);
@@ -70,7 +71,7 @@ function findNearbyPanoramas(pano) {
                     map: map,
                     title: 'panorama'
                 });
-                if (Object.keys(allPanoramas).length < 20) {
+                if (Object.keys(allPanoramas).length < MAX_PANORAMAS_FETCHED) {
                     findNearbyPanoramas(newData);
                 }
             });
