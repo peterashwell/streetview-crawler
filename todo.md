@@ -1,9 +1,11 @@
 [x] loading and crawling panoramas
 [x] manually generate link for image part using lat/lng + elevation
 [x] dump panoramas found to text file
-[ ] script to generate images and fetch them in python
-[ ] manually inspect downloaded images
-[ ] apply to region in darlinghurst
+[x] script to generate images and fetch them in python
+[x] manually inspect downloaded images
+[x] apply to region in darlinghurst
+[ ] get car orientation information
+[ ] write new image fetcher that doesn't get banned / uses API key
 
 Loading and crawling panoramas
 ==============================
