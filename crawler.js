@@ -103,7 +103,7 @@ function generateData() {
             var lat = pano.location.latLng.lat(),
                 lng = pano.location.latLng.lng(),
                 heading = pano.tiles.centerHeading;
-            text += panoId + '\t' + lat + '\t' + lng + '\n' + heading + '\n';
+            text += panoId + '\t' + lat + '\t' + lng + '\t' + heading + '\n';
             console.debug('building txt with:', pano);
         }
     }
