@@ -42,12 +42,14 @@ function drawPanorama() {
             allPanoramas[panorama.getPano()] = result;
             findNearbyPanoramas(result);
         });
+        /*
         google.maps.event.addListener(panorama, 'position_changed', function() {
             var id = panorama.getPano();
             var newPano = new sv.getPanoramaById(id, function(newData) {
                 console.log('new pano:', newData.links);
             });
         });
+        */
     });
 }
 
