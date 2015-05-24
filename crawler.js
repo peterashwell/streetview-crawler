@@ -6,12 +6,15 @@ var svInstance = new google.maps.StreetViewService();
 var allPanoramas = {};
 var map = null;
 var panorama = null;
-var MAX_PANORAMAS_FETCHED = 3;
+var MAX_PANORAMAS_FETCHED = 300;
 
 // Sample locations
 var clovelly = new google.maps.LatLng(-33.9049699,151.2510592);
 var harbourBridge = new google.maps.LatLng(-33.852001,151.211058);
 var darlinghurst = new google.maps.LatLng(-33.879214,151.21527);
+var rileySt = new google.maps.LatLng(-33.876141, 151.21493);
+
+var LOCATION = rileySt;
 
 // Add the panorama to the screen as a basis for the scraping
 // Add a map showing where we are fetching panoramas
@@ -27,7 +30,7 @@ function initialize() {
 // Create a panorama at a location as a starting point, then crawl outwards
 function drawPanorama() {
     var panoramaOptions = {
-        position: darlinghurst /*harbourBridge*/
+        position: LOCATION /*harbourBridge*/
     };
     panorama = new google.maps.StreetViewPanorama(
         document.getElementById('pano'), panoramaOptions
@@ -57,7 +60,7 @@ function drawPanorama() {
 function drawMap() {
     var mapOptions = {
         zoom: 15,
-        center: darlinghurst 
+        center: LOCATION
     };
     map = new google.maps.Map(
         document.getElementById('map'), mapOptions
