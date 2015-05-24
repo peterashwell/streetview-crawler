@@ -10,13 +10,13 @@
 - [ ] write new image fetcher that doesn't get banned
 
 Loading and crawling panoramas
-==============================
+------------------------------
  - use streetview api to fetch linked panoaramas
  - key data type is the StreetViewPanoramaData object, hard to find info about
  - interested in heading of vehicle - StreetViewPanorama.getPhotographerPov()
 
 Manually generate link for image part using lat/lng + elevation
-===============================================================
+---------------------------------------------------------------
 
 First attempt:
  - use fov of about 30 degrees
@@ -27,29 +27,29 @@ First attempt:
  - can also use 'pano' parameter for panorama ID
 
 Dump panoramas found to text file
-=================================
+---------------------------------
  - can be done using blob: http://stackoverflow.com/questions/8178825/create-text-file-in-javascript
  - use window.open(blobUrl) rather than dodgy shit with a link
 
 Script to generate images and fetch them in python
-==================================================
+--------------------------------------------------
  - just use wget -i <file-with-images-list-in>
 
 Get car orientation information
-===============================
+-------------------------------
  - This is actually available in the StreetViewPanoramaData object under
    .tiles.centerHeading
  - Updated crawler to fetch this and save it in the output
 
 Update crawler to choose images efficiently using zoom/orientation
-=================================================================
+-----------------------------------------------------------------
  - Use almost highest fov when fetching so we get decent zoom
  - Use headings in 60-80deg arc from perpendicular to heading, saves half
    of total image fetchings
  - Experiment with different zooms for different arc sections
 
 Do big crawl in darlinghurst
-============================
+----------------------------
  - Try scrapy and fiddle with timings to avoid getting blocked
  - Record failures
  - Let it run!
