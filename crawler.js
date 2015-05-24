@@ -13,6 +13,8 @@ var clovelly = new google.maps.LatLng(-33.9049699,151.2510592);
 var harbourBridge = new google.maps.LatLng(-33.852001,151.211058);
 var darlinghurst = new google.maps.LatLng(-33.879214,151.21527);
 
+// Add the panorama to the screen as a basis for the scraping
+// Add a map showing where we are fetching panoramas
 function initialize() {
     console.log('initializing...');
     
@@ -22,6 +24,7 @@ function initialize() {
     document.getElementById('generate-data').addEventListener('click', generateData);
 }
 
+// Create a panorama at a location as a starting point, then crawl outwards
 function drawPanorama() {
     var panoramaOptions = {
         position: darlinghurst /*harbourBridge*/
@@ -30,7 +33,8 @@ function drawPanorama() {
         document.getElementById('pano'), panoramaOptions
     );
 
-    // This is when the links have loaded in the panorama
+    // This is when the links have loaded in the panorama and we
+    // can start crawling
     google.maps.event.addListener(panorama, 'links_changed', function() {
         // getPanoramaById results are not like javascript pano objects
         // Convert into svInstance result so our function behaves consistently 
@@ -47,6 +51,7 @@ function drawPanorama() {
     });
 }
 
+// Helper map to show our crawler doing its thing
 function drawMap() {
     var mapOptions = {
         zoom: 15,
@@ -86,9 +91,11 @@ function findNearbyPanoramas(pano) {
     }
 }
 
+// Dump our panorama data to a text file using Blob and createObject
 function generateData() {
     var textFile = null;
 
+    // Dump all the panoramas into a gigantic string, tab separated
     var text = 'panoId\tlat\tlng\n';
     for (var panoId in allPanoramas) {
         if (allPanoramas.hasOwnProperty(panoId)) {
@@ -100,10 +107,13 @@ function generateData() {
         }
     }
 
+    // Write it to a blob and generate a url for it
     var data = new Blob([text], {type: 'text/plain'});
     var textFile = window.URL.createObjectURL(data);
 
+    // This saves the file
     window.open(textFile);
 }
 
+// Initialize the crawler when google maps has loaded
 google.maps.event.addDomListener(window, 'load', initialize);
