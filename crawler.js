@@ -6,7 +6,7 @@ var svInstance = new google.maps.StreetViewService();
 var allPanoramas = {};
 var map = null;
 var panorama = null;
-var MAX_PANORAMAS_FETCHED = 10000;
+var MAX_PANORAMAS_FETCHED = 3;
 
 // Sample locations
 var clovelly = new google.maps.LatLng(-33.9049699,151.2510592);
@@ -74,8 +74,6 @@ function findNearbyPanoramas(pano) {
         if (!allPanoramas.hasOwnProperty(link.pano)) {
             svInstance.getPanoramaById(link.pano, function(newData) {
                 allPanoramas[newData.location.pano] = newData;
-                console.log('found panorama, collection now:', allPanoramas);
-                debugger;
                 var marker = new google.maps.Marker({
                     position: newData.location.latLng,
                     map: map,
@@ -98,13 +96,14 @@ function generateData() {
     var textFile = null;
 
     // Dump all the panoramas into a gigantic string, tab separated
-    var text = 'panoId\tlat\tlng\n';
+    var text = 'panoId\tlat\tlng\theading\n';
     for (var panoId in allPanoramas) {
         if (allPanoramas.hasOwnProperty(panoId)) {
-            var pano = allPanoramas[panoId],
-                lat = pano.location.latLng.lat(),
-                lng = pano.location.latLng.lng();
-            text += panoId + '\t' + lat + '\t' + lng + '\n';
+            var pano = allPanoramas[panoId];
+            var lat = pano.location.latLng.lat(),
+                lng = pano.location.latLng.lng(),
+                heading = pano.tiles.centerHeading;
+            text += panoId + '\t' + lat + '\t' + lng + '\n' + heading + '\n';
             console.debug('building txt with:', pano);
         }
     }
